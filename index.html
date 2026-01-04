@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터로 따뜻함을 잇다 | 포트폴리오</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <style>
+        /* --- 변수 및 기본 설정 --- */
+        :root {
+            --primary: #556B2F; /* 올리브 그린: 신뢰와 안정 */
+            --secondary: #E8E6E1; /* 웜 베이지: 사람 친화적 배경 */
+            --text-main: #2C3E50;
+            --text-light: #5D6D7E;
+            --white: #FFFFFF;
+            --accent: #D35400; /* 포인트 컬러 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- 레이아웃 & 유틸리티 --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            margin: 10px auto 0;
+        }
+
+        /* --- 헤더 --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(232, 230, 225, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* 모바일 메뉴 버튼 (기본 숨김) */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- 히어로 섹션 --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        }
+
+        .hero-tag {
+            background: var(--primary);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: var(--text-main);
+            color: var(--white);
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* --- About 섹션 --- */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* --- Skills 섹션 --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* --- Projects 섹션 --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-category {
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* --- Contact 섹션 --- */
+        #contact {
+            text-align: center;
+            background: var(--white);
+        }
+
+        .contact-links a {
+            font-size: 1.2rem;
+            margin: 0 15px;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+        }
+
+        .contact-links a:hover {
+            border-color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background: #f4f4f4;
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        /* --- 애니메이션 (Fade In) --- */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 반응형 미디어 쿼리 --- */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 2.5rem; }
+            .about-content { grid-template-columns: 1fr; }
+            
+            .nav-links {
+                position: absolute;
+                right: 0px;
+                top: 60px;
+                background: var(--white);
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                padding: 20px 0;
+                display: none;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Social Data Analyst.</div>
+                <div class="menu-toggle">☰</div>
+                <ul class="nav-links">
+                    <li><a href="#about">소개</a></li>
+                    <li><a href="#skills">핵심역량</a></li>
+                    <li><a href="#projects">프로젝트</a></li>
+                    <li><a href="#contact">연락처</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container hidden">
+            <span class="hero-tag">사회복지 X 데이터 분석</span>
+            <h1>데이터로 읽고<br>마음으로 잇습니다.</h1>
+            <p>사회복지 전공의 공감 능력과 MS AI School에서 다진 데이터 분석 기술로<br>공공 복지의 사각지대를 밝히는 분석가가 되겠습니다.</p>
+            <a href="#projects" class="btn">프로젝트 보기</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title hidden">About Me</h2>
+            <div class="about-content">
+                <div class="about-text hidden">
+                    <h3>"현장의 목소리를 데이터로 증명합니다"</h3>
+                    <p>안녕하세요. 사회복지학을 전공하며 현장의 어려움을 직접 체감했고, 이를 해결하기 위해 데이터라는 객관적인 도구를 손에 쥐었습니다.</p>
+                    <br>
+                    <p>MS AI School을 수료하며 Python과 머신러닝을 익혔고, 데이터 분석 기획 리모트 인턴십을 통해 실제 비즈니스 문제를 정의하고 해결하는 기획력을 길렀습니다.</p>
+                    <br>
+                    <p>이제는 직관이 아닌 <strong>데이터에 기반한 복지 정책 기획</strong>으로 더 나은 사회를 만드는 데 기여하고 싶습니다.</p>
+                </div>
+                <div class="about-stats hidden" style="background:var(--white); padding:40px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+                    <ul style="display:grid; gap:20px;">
+                        <li><strong>🎓 사회복지학 학사</strong> <br><span style="color:var(--text-light); font-size:0.9rem;">사회문제 해결을 위한 인문학적 소양</span></li>
+                        <li><strong>💻 MS AI School 수료</strong> <br><span style="color:var(--text-light); font-size:0.9rem;">Python, 머신러닝, 데이터 시각화</span></li>
+                        <li><strong>📊 데이터 기획 인턴십</strong> <br><span style="color:var(--text-light); font-size:0.9rem;">문제 정의 및 데이터 기반 솔루션 제안</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" style="background-color: #fdfbfb;">
+        <div class="container">
+            <h2 class="section-title hidden">Core Competencies</h2>
+            <div class="skills-grid hidden">
+                <div class="skill-card">
+                    <span class="skill-icon">🤝</span>
+                    <h3>Social Welfare</h3>
+                    <p>사회 문제에 대한 깊은 이해와 클라이언트와의 소통 능력.</p>
+                    <div class="tag-container">
+                        <span class="tag">사례관리</span>
+                        <span class="tag">프로그램 기획</span>
+                        <span class="tag">공감적 커뮤니케이션</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <span class="skill-icon">📉</span>
+                    <h3>Data Analysis</h3>
+                    <p>데이터 전처리부터 시각화, 인사이트 도출까지.</p>
+                    <div class="tag-container">
+                        <span class="tag">Python</span>
+                        <span class="tag">Pandas/Numpy</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Tableau</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <span class="skill-icon">🤖</span>
+                    <h3>AI & Planning</h3>
+                    <p>머신러닝 모델 활용 및 데이터 분석 프로젝트 기획.</p>
+                    <div class="tag-container">
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">데이터 리터러시</span>
+                        <span class="tag">문제 정의</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title hidden">Projects</h2>
+            <div class="project-grid">
+                <article class="project-card hidden">
+                    <div style="height:200px; background:#dce4e4; display:flex; align-items:center; justify-content:center; color:#5a7d7c; font-weight:bold;">
+                        [Project Image Area]
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">MS AI School Team Project</span>
+                        <h3 class="project-title">취약계층 복지 사각지대 예측 모델</h3>
+                        <p class="project-desc">공공 데이터를 활용하여 복지 혜택을 받지 못하는 잠재적 취약 계층을 머신러닝으로 분류하고 시각화했습니다.</p>
+                        <div class="tag-container">
+                            <span class="tag">Python</span>
+                            <span class="tag">XGBoost</span>
+                            <span class="tag">Streamlit</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card hidden">
+                    <div style="height:200px; background:#e8e6e1; display:flex; align-items:center; justify-content:center; color:#8d8b85; font-weight:bold;">
+                        [Project Image Area]
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Remote Internship</span>
+                        <h3 class="project-title">노인 복지관 이용 활성화 데이터 기획</h3>
+                        <p class="project-desc">지역구 인구 통계 데이터와 이용자 로그 데이터를 분석하여 맞춤형 프로그램을 기획하고 제안서를 작성했습니다.</p>
+                        <div class="tag-container">
+                            <span class="tag">데이터 기획</span>
+                            <span class="tag">EDA</span>
+                            <span class="tag">제안서 작성</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card hidden">
+                    <div style="height:200px; background:#f0f0f0; display:flex; align-items:center; justify-content:center; color:#aaa; font-weight:bold;">
+                        [Project Image Area]
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Personal Study</span>
+                        <h3 class="project-title">전국 장애인 편의시설 현황 대시보드</h3>
+                        <p class="project-desc">공공데이터포털 API를 연동하여 지역별 편의시설 부족 현황을 한눈에 볼 수 있는 대시보드를 구현했습니다.</p>
+                        <div class="tag-container">
+                            <span class="tag">Tableau</span>
+                            <span class="tag">Data Visualization</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container hidden">
+            <h2 class="section-title">Let's Connect</h2>
+            <p style="margin-bottom: 30px; color: var(--text-light);">
+                사회복지 분야의 데이터 기반 의사결정 전문가를 찾으신다면 연락주세요.<br>
+                따뜻한 사회를 위한 데이터 여정에 함께하고 싶습니다.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:your-email@example.com">Email 보내기</a>
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">GitHub</a>
+                <a href="#" target="_blank">Blog</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Social Data Analyst Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 1. 모바일 메뉴 토글
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 2. 스크롤 애니메이션 (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1 // 요소가 10% 보일 때 트리거
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
